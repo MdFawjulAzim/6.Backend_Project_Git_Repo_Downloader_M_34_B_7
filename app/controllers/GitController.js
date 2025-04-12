@@ -28,7 +28,7 @@ export const downloadRepo = async (req, res) => {
     }
 
     //wrap the localFolder path in quotes to handle spaces
-    const cloneCommand = `git clone ${repoUrl} *${localFolder}*`;
+    const cloneCommand = `git clone ${repoUrl} "${localFolder}"`;
 
     //execute the clone command
     console.log(`Executing:${cloneCommand}`);
@@ -40,7 +40,7 @@ export const downloadRepo = async (req, res) => {
   } catch (e) {
     res.status(500).json({
       message: "An error occurred while cloning the repository.",
-      error: error.message,
+      error: e.message,
     });
   }
 };
